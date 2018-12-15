@@ -1,0 +1,35 @@
+---
+name: uaaproxy
+
+releases:
+- name: uaaproxy
+  version: latest
+
+stemcells:
+- os: ubuntu-trusty
+  alias: default
+  version: latest
+
+instance_groups:
+- name: uaaproxy
+  instances: 1
+  stemcell: default
+  azs: [z1]
+  vm_type: default
+  persistent_disk_type: default
+  networks:
+  - name: default
+  jobs:
+  # run the actual proxy, tell it about uaa target
+  - name: uaaproxy
+    release: uaaproxy
+    properties:
+      uaa_url: "https://uaa.service.cf.internal:8443"
+      proxy_port: 8080
+      skip_insecure: true
+
+update:
+  canaries: 1
+  max_in_flight: 3
+  canary_watch_time: 30000-600000
+  update_watch_time: 5000-600000

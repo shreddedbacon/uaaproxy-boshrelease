@@ -1,0 +1,7 @@
+---
+name: uaaproxy
+
+dependencies: []
+
+files:
+  - uaaproxy/uaaproxy

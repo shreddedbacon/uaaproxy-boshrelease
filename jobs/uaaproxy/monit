@@ -1,0 +1,5 @@
+check process uaaproxy
+  with pidfile /var/vcap/sys/run/uaaproxy/pid
+  start program "/var/vcap/jobs/uaaproxy/bin/uaaproxy_ctl start"
+  stop program "/var/vcap/jobs/uaaproxy/bin/uaaproxy_ctl stop"
+  group vcap
